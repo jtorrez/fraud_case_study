@@ -35,14 +35,14 @@ class DataCleaner(object):
         Returns
         -------
         clean_json: JSON str
-            JSON object of raw data sent by POST request
+            Cleaned JSON object of raw data sent by POST request
         """
         pass
 
 
 class MyModel(object):
     def __init__(self, model=None):
-        self.model = None
+        self.model = model
 
     def load_model(self, filename):
         """
