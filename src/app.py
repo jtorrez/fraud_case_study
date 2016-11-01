@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import clean_and_predict as cap
-#import loaddata as ld
+import loaddata as ld
 app = Flask(__name__)
 
 # home page
@@ -21,5 +21,4 @@ if __name__ == '__main__':
     db = ld.connect_to_db()
     cleaner = cap.DataCleaner()
     model = cap.MyModel()
-    model.load_model('model.pkl')
     app.run(host='0.0.0.0', port=8080, debug=True)
