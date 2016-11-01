@@ -16,7 +16,6 @@ def connect_to_db():
     return db
 
 def load_raw(i,db):
-    print db
     raw_t = db.raw_t
     data = json.loads(i)
     raw_t.insert(data)
