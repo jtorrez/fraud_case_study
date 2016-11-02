@@ -63,4 +63,12 @@ def html_table(name, description):
     html = convert_html(description)
     descriptions = convert_table(html)
 
-    return np.concatenate((names, descriptions), axis=1)
+    return names, descriptions
+
+def html_table_dense(name, description):
+    names, descriptions = html_table(name, description)
+
+    names_dense = names.todense()
+    description_dense = description.todense()
+
+    return names_dense, description_dense, np.concatenate((names_dense, description_dense), axis=1)
