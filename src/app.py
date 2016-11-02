@@ -39,16 +39,12 @@ def register_for_ping(ip, port):
 
 
 if __name__ == '__main__':
-    """
     # Register for pinging service
     ip_address = socket.gethostbyname(socket.gethostname())
     print "attempting to register %s:%d" % (ip_address, PORT)
     register_for_ping(ip_address, str(PORT))
-    """
-
 
     db = ld.connect_to_db()
-    cleaner = cap.DataCleaner()
     model = mm.MyModel()
     model.load_model('finalized_model.pkl')
     app.run(host='0.0.0.0', port=8080, debug=True)
