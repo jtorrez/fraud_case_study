@@ -87,7 +87,12 @@ class Clean_predict(object):
         '''INPUT: GBC model
         Fits and predicts GBC model for module.
         OUTPUT: fitted model as json object'''
-        model = GradientBoostingClassifier()
+        model = GradientBoostingClassifier(loss='deviance', learning_rate=0.005, \
+        n_estimators=4700, subsample=0.75, criterion='friedman_mse', \
+        min_samples_split=1000, min_samples_leaf=30, min_weight_fraction_leaf=0.0, \
+        max_depth=9, min_impurity_split=1e-07, init=None, random_state=None, \
+        max_features=11, verbose=0, max_leaf_nodes=None, warm_start=False, \
+        presort='auto')
         model.fit(self.X_train, self.y_train)
         filename = 'finalized_model.pkl'
         pickle.dump(model, open(filename, 'wb'))
