@@ -1,12 +1,14 @@
 <html lang="en">
 <head>
-  <meta charset="utf-8">
 
-  <title> Predicting Fraud </title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css">
+  <meta charset="utf-8">
+  <title> Predicting Fraud t</title>
   <meta name="description" content="Predicting Fraud">
   <meta name="author" content="Galvanize DSI">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
 
 
 </head>
@@ -21,115 +23,8 @@
     </div>
 
     <div>
-        <button id="btn-load">Load Data 1</button>&nbsp;
+        <button id="btn-load">Refreshed Data</button>&nbsp;
     </div>
 
-
-    <script type="text/javascript">
-
-    let dynamicTable = (function() {
-
-    let _tableId, _table,
-        _fields, _headers,
-        _defaultText;
-
-    /** Builds the row with columns from the specified names.
-     *  If the item parameter is specified, the memebers of the names array will be used as property names of the item; otherwise they will be directly parsed as text.
-     */
-    function _buildRowColumns(names, item) {
-        let row = '<tr>';
-        if (names && names.length > 0)
-        {
-            $.each(names, function(index, name) {
-                let c = item ? item[name+''] : name;
-                row += '<td>' + c + '</td>';
-            });
-        }
-        row += '<tr>';
-        return row;
-    }
-
-    /** Builds and sets the headers of the table. */
-    function _setHeaders() {
-        // if no headers specified, we will use the fields as headers.
-        _headers = (_headers == null || _headers.length < 1) ? _fields : _headers;
-        let h = _buildRowColumns(_headers);
-        if (_table.children('thead').length < 1) _table.prepend('<thead></thead>');
-        _table.children('thead').html(h);
-    }
-
-    function _setNoItemsInfo() {
-        if (_table.length < 1) return; //not configured.
-        let colspan = _headers != null && _headers.length > 0 ?
-            'colspan="' + _headers.length + '"' : '';
-        let content = '<tr class="no-items"><td ' + colspan + ' style="text-align:center">' +
-            _defaultText + '</td></tr>';
-        if (_table.children('tbody').length > 0)
-            _table.children('tbody').html(content);
-        else _table.append('<tbody>' + content + '</tbody>');
-    }
-
-    function _removeNoItemsInfo() {
-        let c = _table.children('tbody').children('tr');
-        if (c.length == 1 && c.hasClass('no-items')) _table.children('tbody').empty();
-    }
-
-    return {
-        /** Configres the dynamic table. */
-        config: function(tableId, fields, headers, defaultText) {
-            _tableId = tableId;
-            _table = $('#' + tableId);
-            _fields = fields || null;
-            _headers = headers || null;
-            _defaultText = defaultText || 'No items to list...';
-            _setHeaders();
-            _setNoItemsInfo();
-            return this;
-        },
-        /** Loads the specified data to the table body. */
-        load: function(data, append) {
-            if (_table.length < 1) return; //not configured.
-            _setHeaders();
-            _removeNoItemsInfo();
-            if (data && data.length > 0) {
-                let rows = '';
-                $.each(data, function(index, item) {
-                    rows += _buildRowColumns(_fields, item);
-                });
-                let mthd = append ? 'append' : 'html';
-                _table.children('tbody')[mthd](rows);
-            }
-            else {
-                _setNoItemsInfo();
-            }
-            return this;
-        },
-        /** Clears the table body. */
-        clear: function() {
-            _setNoItemsInfo();
-            return this;
-        }
-    };
-}());
-
-$(document).ready(function(e) {
-
-    let data1 = [
-        { 'probability': '0.7', 'label': 'High', field3: 'value a3', field4: 'value a4' },
-        { 'probability': '0.3', 'label': 'Low', field3: 'value b3', field4: 'value b4' },
-        ];
-
-    let dt = dynamicTable.config('prediction-table',
-                                 ['probability', 'label'],
-                                 ['Probability', 'Risk Label'], //set to null for field names instead of custom header names
-                                 'There are no items to list...');
-
-
-    $('#btn-load').click(function(e) {
-        dt.load(data1);
-    });
-
-});
-    </script>
 </body>
 </html>
