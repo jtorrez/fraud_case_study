@@ -31,7 +31,7 @@ def convert_table(documents):
     tfidf = TfidfVectorizer(stop_words='english')
     tfidfed = tfidf.fit_transform(documents)
 
-    table = np.hstack(tfidfed)  # a numpy array consisting of 1 x #words sparse matrix
+    table = scipy.sparse.vstack(tfidfed)  # a numpy array consisting of 1 x #words sparse matrix
 
     return table
 
