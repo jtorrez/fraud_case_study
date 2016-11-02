@@ -27,8 +27,6 @@ def connect_to_db():
     return db
 
 def load_raw(i,db):
-<<<<<<< HEAD
-=======
     """
     Loads raw json file into mongodb colllection
 
@@ -42,7 +40,6 @@ def load_raw(i,db):
     None
 
     """
->>>>>>> fa0d9a3038c8afbb9b6f0247cc41503fba4bcc9d
     raw_t = db.raw_t
     data = json.loads(i)
     raw_t.insert(data)
