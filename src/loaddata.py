@@ -81,7 +81,7 @@ def load_pred(pred_tup,clean_obj_id,db):
 
 def dump_collection(db, collection):
     tlist = [(jsonobj) for jsonobj in db[collection].find({},{'probability':1, 'label':1, '_id':0})]
-    return json.dumps(tlist)
+    return json.dumps(tlist)[1:-1]
 
 if __name__ == '__main__':
     db = connect_to_db()

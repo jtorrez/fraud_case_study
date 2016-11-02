@@ -27,17 +27,23 @@ def score():
     prediction = model.transform_predict(clean_json)
     ld.load_pred(prediction, obj_id, db)
 
+@app.route('/load', methods=['GET'])
+def load():
+    data = ld.dump_collection(db, 'raw_t')
+    return data
+
 def register_for_ping(ip, port):
     registration_data = {'ip': ip, 'port': port}
     requests.post(REGISTER_URL, data=registration_data)
 
 
 if __name__ == '__main__':
-
+    """
     # Register for pinging service
     ip_address = socket.gethostbyname(socket.gethostname())
     print "attempting to register %s:%d" % (ip_address, PORT)
     register_for_ping(ip_address, str(PORT))
+    """
 
 
     db = ld.connect_to_db()
