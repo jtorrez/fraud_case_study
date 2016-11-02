@@ -7,6 +7,8 @@ import time
 from datetime import datetime
 import loaddata as ld
 import cleaning_script as cs
+from pprint import pprint
+import copy
 app = Flask(__name__)
 PORT = 5353
 REGISTER_URL = "http://10.5.3.92:5000/register"
@@ -22,11 +24,12 @@ def index():
 @app.route('/score', methods=['POST'])
 def score():
     raw_data = request.json
+    data_copy = copy.deepcopy(raw_data)
     ld.load_raw(raw_data, db)
-    clean_json = cs.clean(raw_data)
-    obj_id = ld.load_clean(clean_json, db)
+    clean_json = cs.clean(data_copy)
     prediction = model.transform_predict(clean_json)
-    ld.load_pred(prediction, obj_id, db)
+    ld.load_pred(prediction, db)
+    return 'OK'
 
 @app.route('/load', methods=['GET'])
 def load():
@@ -47,4 +50,4 @@ if __name__ == '__main__':
     db = ld.connect_to_db()
     model = mm.MyModel()
     model.load_model('finalized_model.pkl')
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=PORT, debug=True)

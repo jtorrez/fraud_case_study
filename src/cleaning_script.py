@@ -2,8 +2,10 @@ import pandas as pd
 import json
 
 def convert_json_to_df(raw_json):
-    df = pd.read_json(raw_json)
-    return df
+    json_str = json.dumps(raw_json)
+    df = pd.DataFrame.from_dict(raw_json, orient='index')
+    new_df = df.transpose()
+    return new_df
 
 def clean_df(df):
     df['null_count'] = df.isnull().sum(axis=1)

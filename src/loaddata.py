@@ -41,7 +41,7 @@ def load_raw(i,db):
 
     """
     raw_t = db.raw_t
-    raw_t.insert(i)
+    raw_t.insert_one(i)
 
 def load_clean(i,db):
     """
@@ -57,9 +57,9 @@ def load_clean(i,db):
     Object id from inserted row
     """
     clean_t = db.clean_t
-    return clean_t.insert(data)
+    clean_t.insert(i)
 
-def load_pred(pred_tup,clean_obj_id,db):
+def load_pred(pred_tup,db):
     """
     Loads predictions into mongodb collection
 
@@ -74,10 +74,9 @@ def load_pred(pred_tup,clean_obj_id,db):
     None
     """
     # pred_tup = tuple of probablity
-    data = [{"probability":pred_tup[0],'label': pred_tup[1], 'cleandata_ob_id': clean_obj_id}]
-    n = json.dumps(data)
+    data = {'probability':pred_tup[0],'label': pred_tup[1]}
     pred_t = db.pred_t
-    pred_t.insert(n)
+    pred_t.insert(data)
 
 def dump_collection(db, collection):
     tlist = [(jsonobj) for jsonobj in db[collection].find({},{'probability':1, 'label':1, '_id':0})]
