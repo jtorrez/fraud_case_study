@@ -41,8 +41,7 @@ def load_raw(i,db):
 
     """
     raw_t = db.raw_t
-    data = json.loads(i)
-    raw_t.insert(data)
+    raw_t.insert(i)
 
 def load_clean(i,db):
     """
@@ -58,7 +57,6 @@ def load_clean(i,db):
     Object id from inserted row
     """
     clean_t = db.clean_t
-    data = json.loads(i)
     return clean_t.insert(data)
 
 def load_pred(pred_tup,clean_obj_id,db):
