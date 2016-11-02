@@ -62,6 +62,7 @@ let dynamicTable = (function() {
           if (_table.length < 1) return; //not configured.
           _setHeaders();
           _removeNoItemsInfo();
+          console.log(data)
           if (data && data.length > 0) {
               let rows = '';
               $.each(data, function(index, item) {
@@ -93,20 +94,23 @@ $.ajax({
                                ['probability', 'label'],
                                ['Probability', 'Risk Label'], //set to null for field names instead of custom header names
                                'There are no items to list...');
-        dt.load(JSON.parse(data));
+        dt.load(JSON.parse('[' + data + ']'));
     },
 })
 };
 
+
+
 $(document).ready(function(e) {
 
-let data1 = [
-    { 'probability': '0.7', 'label': 'High', field3: 'value a3', field4: 'value a4' },
-    { 'probability': '0.3', 'label': 'Low', field3: 'value b3', field4: 'value b4' },
-    ];
+  let data1 = [
+      { 'probability': '0.7', 'label': 'High', field3: 'value a3', field4: 'value a4' },
+      { 'probability': '0.3', 'label': 'Low', field3: 'value b3', field4: 'value b4' },
+      ];
 
-$('#btn-load').click(function(e) {
-    get_database();
-});
+  $('#btn-load').click(function(e) {
+      get_database();
+  });
+  setInterval(function () {document.getElementById("btn-load").click();}, 100);
 
 });
