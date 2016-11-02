@@ -12,7 +12,7 @@ import pickle
 
 class Clean_predict(object):
     def __init__(self):
-        self.df = clean.load_and_clean('data.json')
+        self.df = clean.load_and_clean('../../fraud-detection-case-study/data/data.json')
         #self.text_features = ct.html_table(df['name'], df['description'])
         self.numeric_df = None
         self.clean_df = None
@@ -60,6 +60,7 @@ class Clean_predict(object):
         feature_df = self.clean_df.drop('fraud', axis=1)
         X = feature_df
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, y, test_size=0.4, random_state=0)
+        
 
     def initialize_models(self):
         '''INPUT: None
