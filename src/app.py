@@ -1,14 +1,10 @@
 from flask import Flask, render_template, request, jsonify
 import clean_and_predict as cap
-<<<<<<< HEAD
-from flask import Flask, request, render_template
 import json
 import requests
 import socket
 import time
 from datetime import datetime
-=======
->>>>>>> ad85598c587099baa407bc5d3f18dc954425afc7
 import loaddata as ld
 app = Flask(__name__)
 PORT = 5353
