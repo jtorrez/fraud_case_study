@@ -92,7 +92,7 @@ $.ajax({
     success: function (data) {
       let dt = dynamicTable.config('prediction-table',
                                ['probability', 'label'],
-                               ['Probability', 'Risk Label'], //set to null for field names instead of custom header names
+                               ['Probability of Fraud', 'Risk Label'], //set to null for field names instead of custom header names
                                'There are no items to list...');
         dt.load(JSON.parse('[' + data + ']'));
     },
@@ -111,6 +111,6 @@ $(document).ready(function(e) {
   $('#btn-load').click(function(e) {
       get_database();
   });
-  setInterval(function () {document.getElementById("btn-load").click();}, 100);
+  setInterval(function () {document.getElementById("btn-load").click();}, 1000);
 
 });
